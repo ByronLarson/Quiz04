@@ -193,7 +193,7 @@ def QRFactor(matrix):
 
     # everything is indexed via the columns of the input matrix
     for i in range(cA):
-      print(i)
+      
       Rcontainer[i]= twoNorm(matrix[i])
 
       rsub = 1 / Rcontainer[i]
