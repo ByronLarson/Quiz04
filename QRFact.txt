@@ -1,0 +1,261 @@
+def dot(vector01,vector02):
+  '''
+  Inputs
+    vector01 should be 1 x n in length
+    vector02 should be 1 x n in length
+
+  Output should be a scalar
+
+  This function compares the lengths of two vectors together.  
+  If they are the same length it multiolies the first column of vector01 by the first column of vector02.
+  Next it takes this value and stores it in the out container.  
+  it repeats this multiplication for each column and adds the products together inside of the out container.
+    '''
+
+  # This variable will keep track of the validity of our input.
+  inputStatus = True  
+  # This for loop will check each element of the vector to see if it's a number. 
+  for i in range(len(vector01)):  
+    if ((type(vector[i]) != int) and (type(vector[i]) != float) and (type(vector[i]) != complex)):
+      inputStatus = False
+      print("Invalid Input")
+  # If the input is valid the function continues to compute the 2-norm
+  if inputStatus == True:
+    result = 0
+
+  # This variable will keep track of the validity of our input.
+  inputStatus = True  
+  # This for loop will check each element of the vector to see if it's a number. 
+  for i in range(len(vector02)):  
+    if ((type(vector[i]) != int) and (type(vector[i]) != float) and (type(vector[i]) != complex)):
+      inputStatus = False
+      print("Invalid Input")
+  # If the input is valid the function continues to compute the 2-norm
+  if inputStatus == True:
+    result = 0
+
+
+  if len(vector01)==len(vector02) and len(vector01)!=0:#checks to see that the two vectors are the same length and the second vector is not 0
+    out = 0 # starts the holding array at 0
+    for k in range(len(vector01)):
+        out += vector01[k] * vector02[k]# for each iteration after the product is done it adds the number into the container out
+    return out
+  else:
+    print("input invalid")
+
+def vecSubtract(vector01,vector02):
+
+  '''
+  Inputs
+  vector01 should be 1 x n in length
+  vector02 should be a 1 x n in length
+  
+  Output 
+  newvec should be a 1 x n vector
+  
+
+  In the vecSubtract function two vector lengths are compared, if they are the same length then they can be subtracted.
+  Each element from their respective places in each row is subtracted from each other then returned into a new vector containing the result.
+
+  '''
+
+  # This variable will keep track of the validity of our input.
+  inputStatus = True  
+  # This for loop will check each element of the vector to see if it's a number. 
+  for i in range(len(vector01)):  
+    if ((type(vector[i]) != int) and (type(vector[i]) != float) and (type(vector[i]) != complex)):
+      inputStatus = False
+      print("Invalid Input")
+  # If the input is valid the function continues to compute the 2-norm
+  if inputStatus == True:
+    result = 0
+
+  # This variable will keep track of the validity of our input.
+  inputStatus = True  
+  # This for loop will check each element of the vector to see if it's a number. 
+  for i in range(len(vector02)):  
+    if ((type(vector[i]) != int) and (type(vector[i]) != float) and (type(vector[i]) != complex)):
+      inputStatus = False
+      print("Invalid Input")
+  # If the input is valid the function continues to compute the 2-norm
+  if inputStatus == True:
+    result = 0  
+
+
+
+  if len(vector01)==len(vector02):# checks to see that the vectors are the same length
+    newvec = []
+    for i in range(len(vector01)):
+      newvec.append(vector01[i] - vector02[i])# for each iteration each vector is subtracted from one another and put into newvec
+    return newvec
+  else:
+    print("invalid inputs")
+
+def scalarVecMulti(scalar,vector):
+
+  '''
+  Input
+  scalar should be a number
+  vector should be a 1 x n in length
+  
+  Output
+  newvector should be a 1 x n in length
+
+  This function inputs a scalar and a vector, then multiplies the scalar to every element in the vector for the length of the vector.
+  The loop iterates for the range of the vector, each iteration the scalar is multiplied by the scalar.
+  '''
+
+  # This variable will keep track of the validity of our input.
+  inputStatus = True  
+  # This for loop will check each element of the vector to see if it's a number. 
+  for i in range(len(vector)):  
+    if ((type(vector[i]) != int) and (type(vector[i]) != float) and (type(vector[i]) != complex)):
+      inputStatus = False
+      print("Invalid Input")
+  # If the input is valid the function continues to compute the 2-norm
+  if inputStatus == True:
+    result = 0
+  
+  newvector = []
+
+  for i in range(len(vector)):
+    newvector.append(scalar * vector[i])
+  # for each iteration the vector element is multiplied by the scalar and put into the new vector
+  return newvector
+  
+def twoNorm(vector):
+  '''
+  twoNorm takes a vector as it's argument. It then computes the sum of  the squares of each element of the vector. It then returns the square root of this sum.
+  '''
+  # This variable will keep track of the validity of our input.
+  inputStatus = True  
+  # This for loop will check each element of the vector to see if it's a number. 
+  for i in range(len(vector)):  
+    if ((type(vector[i]) != int) and (type(vector[i]) != float) and (type(vector[i]) != complex)):
+      inputStatus = False
+      print("Invalid Input")
+  # If the input is valid the function continues to compute the 2-norm
+  if inputStatus == True:
+    result = 0
+
+
+  # This for loop will compute the sum of the squares of the elements of the vector. 
+    for i in range(len(vector)):
+      result = result + (vector[i]**2)
+    result = result**(1/2)
+    return result
+ 
+def normalize(vector):
+
+  '''
+  Input
+  vector is a 1 x n in length
+  
+  Output
+  newestvector is a 1 x n in length
+  
+  This function calculates the normalization of a vector with respect to the infinity norm.
+  The infinity norm is the maximum absolute value of its components.  
+  I used a for loop to take the absolute value of every element in vector, then another for loop to compare each element in the newvector in order to find the largest value.  
+  From here we multiply 1/ largest times the original vector to get the normalized vector
+  
+  I used the code from part D to find the largest absolute number in the vector and then just added another for loop to apply the 1/ largest to the original vector.
+  '''
+
+  # This variable will keep track of the validity of our input.
+  inputStatus = True  
+  # This for loop will check each element of the vector to see if it's a number. 
+  for i in range(len(vector)):  
+    if ((type(vector[i]) != int) and (type(vector[i]) != float) and (type(vector[i]) != complex)):
+      inputStatus = False
+      print("Invalid Input")
+  # If the input is valid the function continues to compute the 2-norm
+  if inputStatus == True:
+    result = 0
+  
+  newvector = []
+
+  for i in range(len(vector)):# for each iteration we take the absolute value of every element in vector
+    newvector.append(abs(vector[i]))
+
+  largest=newvector[0]
+
+  for large in newvector:# for each iteration find the largest element in newvector if it finds a larger element it sets that to the largest and continues to compare elements for the range of elements in vector
+    if large > largest:
+        largest=large
+
+  newestvector = []
+
+  for j in range(len(vector)):#for each iteration multiply 1/largest times each element in vector
+    newestvector.append(1/largest * vector[j])
+
+  return newestvector
+      
+# make transpose function
+def transMat(matrix):
+
+  '''
+  Input
+  matrix is n x m dimensions
+  Output
+  matrix is m x n dimensions
+  '''
+
+  rA = len(matrix) # number of rows in the matrix
+  cA = len(matrix[0]) # number of columns in the matrix
+  #change columns to rows
+  container = [[0]*rA for i in range(cA)]
+
+  for i in range(rA):
+
+    for j in range(cA):
+
+      container[i][j] = matrix[j][i]
+
+    return container
+
+    #testmat = [[1,2,3],[4,5,6],[7,8,9]]
+
+    #print(transMat(testmat))
+
+
+def QRFactor(matrix)
+
+  '''
+  Input
+  matrix is a n x m matrix input
+
+  Outputs
+  matrix Q is a n x m matrix
+  matrix R is a n x m upper triangular matrix
+
+
+  '''
+  
+  rA = len(matrix)# find number of rows in matrix
+  cA = len(matrix[0] # find the number of columns in matrix
+
+  Qcontainer = [[0]*cB for row in range(rA)]
+  Rcontainer = [[0]*cB for row in range(rA)]
+
+  # make for loop to seperate matrix into rA number of column vectors
+  #[matrix[i][column] for i in range(len(rA))]
+
+
+  for i = 1 to rA
+    
+    r[i]= TwoNorm(first col vector of matrix)
+    q[i] = (first col vector of matrix)/r[i]
+    
+    for j = i + 1 to rA
+      r[i][j] = transMat((q1 col vector)) * q[i]
+      (second col vector) = (second col vector) - r[i][j]*q[i]
+
+
+      m = scalarVecMulti(r[i][j],q[i])
+      (second col vector) = vecSubtract((second col vector),m)
+
+
+    
+
+
