@@ -135,7 +135,41 @@ def twoNorm(vector):
       result = result + (vector[i]**2)
     result = result**(1/2)
     return result
-    
+
+def matVec(matrix,vector):
+  '''
+  Inputs:
+    A- matrix with dimensions row-matrix x column-matrix
+    B- matrix with dimensions row-vector x 1
+  Output:
+    C - matrix with dimensions row-matrix x 1
+  Details:
+    This is the matrix times vector multiplication algorithm.
+    For each matrix row, each vector columns = 1, and con to 0. con is the placeholder matrix to add each repition. Then for each matrix     column, add matrix[i][k]*vector[k] to con. Then set container[i][1] = con.
+    The result is a Matrix rows in the matrix by 1.
+  '''
+  if ischeckmat(matrix) == True:
+    if ischeckvec(vector) == True:
+      rA = len(matrix)# find the number of rows in matrix A
+      cA = len(matrix[0])# find the number of columns in matrix A
+      rB = len(vector)# find the number of rows in vector B
+
+
+      #initialize a container to be a matrix  with 0s for all entries.
+      container = [[0]*1 for row in range(rA)]
+
+
+      for i in range(rA):
+        # iterate through rows of the matrix
+        # iterate through columns of vector whish should be 1
+        con= 0
+        for k in range(cA):
+          #iterate through columns of the matrix
+          con +=  matrix[i][k]*vector[k]
+          #use += to add con + calculated value to placeholder matrix
+        container[i] = con #final matrix will be the number of rows by 1 column
+      return container
+
 def transposeMat(matrix):
 
   '''
@@ -164,7 +198,6 @@ def transposeMat(matrix):
 
     return container
 
-
 def QRFactor(matrix):
 
   '''
@@ -174,44 +207,39 @@ def QRFactor(matrix):
   Outputs
   matrix Q is a n x m matrix
   matrix R is a m x m upper triangular matrix
-
+  
+  The gram-Schmidt algorithm take column vectors in a matrix and produces orthonormal vectors. 
+  The projections Q anr R are subtracted from the original matrix.
+  
 
   '''
   if ischeckmat(matrix) == True:
   
-    rA = len(matrix)# find number of rows in matrix
-    cA = len(matrix[0]) # find the number of columns in matrix
+    cA = len(matrix)# find number of rows in matrix
+    rA = len(matrix[0]) # find the number of columns in matrix
 
 
-    Qcontainer = [[0] * cA for row in range(rA)]
+    Qcontainer = [[0] * rA for row in range(cA)]
     Rcontainer = [[0] * cA for row in range(cA)]
     # when multiplying the dimensions of r need to match with q
 
 
-    # make for loop to seperate matrix into rA number of column vectors
-    #[matrix[i][column] for i in range(len(rA))]
-
+  
     # everything is indexed via the columns of the input matrix
     for i in range(cA):
       
-      Rcontainer[i]= twoNorm(matrix[i])
-
-      rsub = 1 / Rcontainer[i]
+      Rcontainer[i][i]= twoNorm(matrix[i])
+      #normalize Qcontainer
+      rsub = 1 / Rcontainer[i][i]
 
       Qcontainer[i] = scalarVecMulti(rsub,matrix[i])
       
-      for j in range(cA,i+1):
-        
-        Rcontainer[i][j] = transposeMat(Qcontainer[i] * matrix[i])
+      for j in range(i+1,cA):
+
+        Rcontainer[j][i] = dot(Qcontainer[i],matrix[j])
 
         m = scalarVecMulti(Rcontainer[i][j],Qcontainer[i])
 
         matrix[j] = vecSubtract(matrix[j],m)
-
+        # subtrace the projections made by m
     return [Qcontainer,Rcontainer]
-
-testmat = [[1,2,3],[4,5,6],[7,8,9]]
-
-print(QRFactor(testmat))  
-
-
