@@ -193,7 +193,7 @@ def transposeMat(matrix):
     for i in range(rA):
       
       for j in range(cA):
-        
+        # these two loops swap the rows and columns respectively
         container[j][i] = matrix[i][j]
 
     return container
@@ -209,7 +209,7 @@ def QRFactor(matrix):
   matrix R is a m x m upper triangular matrix
   
   The gram-Schmidt algorithm take column vectors in a matrix and produces orthonormal vectors. 
-  The projections Q anr R are subtracted from the original matrix.
+  The projections Q anr R are subtracted from the original matrix as it iterates through the for loops.
   
 
   '''
@@ -243,3 +243,7 @@ def QRFactor(matrix):
         matrix[j] = vecSubtract(matrix[j],m)
         # subtrace the projections made by m
     return [Qcontainer,Rcontainer]
+
+
+#testmat = [[1,2,3],[4,5,6],[7,8,9]]
+#print(QRFactor(testmat))
